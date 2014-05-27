@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class="col-lg-12 text-center">
+        <h1>3.. 2.. 1.. Blog !</h1>
+        <p>This is a very simple blogging tool.</p>
+        <p>Just 3 steps (or jumps, if you feel more athletic...) and you will be in the blogosphere!</p>
+        <br />
+        <div class="col-xs-12 col-ms-6 col-sm-6 text-right">
+            <a href="{% url 'wizard_blog_create' %}" class="btn btn-default">I'm a rookie.<br />Please, show me the steps.</a>
+        </div>
+        <div class="col-xs-12 col-ms-6 col-sm-6 text-left">
+            <a href="{% url 'admin_panel' %}" class="btn btn-default">Been there, done that...<br />bring me to the Admin side!</a>
+        </div>
+    </div>
+{% endblock %}

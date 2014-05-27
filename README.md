@@ -1,2 +1,3 @@
-blog-3-steps
+3 Steps Blog
 ============
+A very simple blogging tool.

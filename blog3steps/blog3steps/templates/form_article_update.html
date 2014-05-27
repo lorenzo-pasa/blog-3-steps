@@ -1,0 +1,25 @@
+{% extends "admin_panel.html" %}
+
+
+{% block title %}| Update article{% endblock %}
+
+{% block admin_page %}
+    <div class="col-lg-12">
+        <h3>Update the article</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            {% for field in form %}
+                <p>
+                    {{ field.label_tag }}: {{ field }} <small><em>{{ field.help_text }}</em></small>
+                </p>
+                {% if field.errors %}
+                    <p>{{ field.errors }}</p>
+                    <br />
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="Update" />
+            <a class="btn btn-default btn-xs" href="{% url 'article_list' %}">Cancel</a>            
+        </form>
+    </div>
+{% endblock %}

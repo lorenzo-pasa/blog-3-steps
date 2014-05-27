@@ -48,7 +48,16 @@ coverage.xml
 # Django stuff:
 *.log
 *.pot
+*~
+sitestatic
 
 # Sphinx documentation
 docs/_build/
 
+# Djangoappengine & friends
+blog3steps/autoload
+blog3steps/dbindexer
+blog3steps/django
+blog3steps/djangoappengine
+blog3steps/djangotoolbox
+blog3steps/.gaedata

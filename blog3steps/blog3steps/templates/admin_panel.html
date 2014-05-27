@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block title %}| Admin{% endblock %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <h1 class="text-center">Administration panel</h1>        
+        <div class="text-center">
+            <a href="{% url 'article_list' %}" class="btn btn-default"">Articles management</a>        
+            {% if blog %}
+                <a href="{% url 'blog_update' pk=blog.pk %}" class="btn btn-default">Blog settings</a>
+                <a href="{% url 'blog_public' blog_url=blog.url %}" class="btn btn-default"><span class="glyphicon glyphicon-star"></span> Public Blog</a>
+            {% else %}
+                <a href="{% url 'blog_add' %}" class="btn btn-default"><span class="glyphicon glyphicon-book"></span> Create a new Blog</a>
+            {% endif %}
+            {% if url_logout %}
+                <a href="{{ url_logout }}" class="btn btn-default btn-xs">Logout</a>
+            {% endif %}            
+        </div>
+        <hr />
+        <div class="col-lg-12">
+            {% block admin_page %}
+                <h3>Welcome!</h3>
+                <h4>This is the Admin side.<br />
+                Feel free to have a look around, and when you feel ready... Let's Blog !</h4>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+

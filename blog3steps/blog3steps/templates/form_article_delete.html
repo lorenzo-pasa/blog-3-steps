@@ -1,0 +1,16 @@
+{% extends "admin_panel.html" %}
+
+
+{% block title %}| Delete article{% endblock %}
+
+{% block admin_page %}
+    <div class="col-lg-12">
+        <h3>Delete the article</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>Are you sure to delete this article?</p>
+            <input type="submit" value="Yes!" />
+            <a class="btn btn-default btn-xs" href="{% url 'article_list' %}">No, back to the article list</a>
+        </form>
+    </div>        
+{% endblock %}

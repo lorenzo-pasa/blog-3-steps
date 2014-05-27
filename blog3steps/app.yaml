@@ -1,0 +1,38 @@
+application: blog3steps
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+builtins:
+- remote_api: on
+- appstats: on
+
+#inbound_services:
+#- warmup
+
+handlers:
+- url: /_ah/queue/deferred
+  script: djangoappengine.deferred.handler.application
+  login: admin
+
+- url: /_ah/stats/.*
+  script: djangoappengine.appstats.application
+
+- url: /media/admin
+  static_dir: django/contrib/admin/media
+  expiration: '0'
+
+- url: /static
+  static_dir: blog3steps/static
+  
+- url: /wizard/.*
+  script: djangoappengine.main.application
+  login: required
+
+- url: /administration/.*
+  script: djangoappengine.main.application
+  login: required
+  
+- url: /.*
+  script: djangoappengine.main.application

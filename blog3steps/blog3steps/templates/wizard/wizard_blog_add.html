@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block title %}| Wizard: blog{% endblock %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <h3>2 steps to go !</h3>
+        <div>
+            <p>
+                You might be thinking: "What? They weren't 3 steps?"<br />
+                Indeed. You have just logged into the app using your Gmail account, right?<br />
+                Well, <em>that</em> was the first step. Easy, isn't it?<br />
+                <br />
+                Now you can create your personal Blog!<br />
+                Just fill the form below:
+            </p>
+        </div>
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>{{ form.non_field_errors }}</p>
+                {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}: {{ field }} <small><em>{{ field.help_text }}</em></small>
+                    </p>
+                    {% if field.errors %}
+                        <p>{{ field.errors }}</p>
+                        <br />
+                    {% endif %}
+                {% endfor %}
+                <input type="submit" value="Next step!" />
+            </form>
+        </div>
+    </div>
+{% endblock %}
