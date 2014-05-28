@@ -18,6 +18,7 @@ handlers:
 
 - url: /_ah/stats/.*
   script: djangoappengine.appstats.application
+  login: admin
 
 - url: /media/admin
   static_dir: django/contrib/admin/media

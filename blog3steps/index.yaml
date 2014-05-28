@@ -38,3 +38,16 @@ indexes:
   - name: administrator
   - name: modified
     direction: desc
+
+- kind: blog3steps_blog
+  properties:
+  - name: administrator
+  - name: url
+  - name: modified
+    direction: desc
+
+- kind: blog3steps_blog
+  properties:
+  - name: url
+  - name: modified
+    direction: desc
