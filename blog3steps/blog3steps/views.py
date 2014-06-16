@@ -28,7 +28,7 @@ class ArticleListView(AuthenticatedUserMixin, ListView):
         try:
             user_id = users.get_current_user().user_id()        
             blog = Blog.objects.get(administrator=user_id)
-        except:
+        except (AttributeError, Blog.DoesNotExist):
             blog = None
         queryset = queryset.filter(blog=blog)
         return queryset
@@ -48,7 +48,7 @@ class ArticleCreateView(AuthenticatedUserMixin, CreateView):
             user_id = users.get_current_user().user_id()
             blog = Blog.objects.get(administrator=user_id)
             return super(ArticleCreateView, self).dispatch(request, *args, **kwargs)            
-        except:
+        except (AttributeError, Blog.DoesNotExist):
             return redirect(reverse('article_list'))
     
     def form_valid(self, form):
@@ -99,7 +99,7 @@ class BlogCreateView(AuthenticatedUserMixin, CreateView):
             user_id = users.get_current_user().user_id()
             blog = Blog.objects.get(administrator=user_id)
             return redirect(reverse('blog_update', kwargs={'pk':blog.pk}))
-        except:
+        except (AttributeError, Blog.DoesNotExist):
             return super(BlogCreateView, self).dispatch(request, *args, **kwargs)        
 
     def form_valid(self, form):
@@ -133,7 +133,7 @@ class BlogPublicView(TemplateView):
         context = super(BlogPublicView, self).get_context_data(**kwargs)
         try:
             user_id = users.get_current_user().user_id()
-        except:
+        except AttributeError:
             user_id = None        
         blog_url = self.kwargs.get('blog_url', None)
         blog = get_object_or_404(Blog, url=blog_url)
@@ -165,7 +165,7 @@ class WizardArticleCreateView(ArticleCreateView):
             user_id = users.get_current_user().user_id()
             blog = Blog.objects.get(administrator=user_id)
             return reverse('blog_public', kwargs={'blog_url':blog.url})
-        except:
+        except (AttributeError, Blog.DoesNotExist):
             return reverse('admin_panel')
 
 #-- end of the Wizard classes --#
