@@ -95,7 +95,7 @@ class ArticleListViewTest(TestCase):
         
         # "response.context['article_list']" belongs to the "Queryset" type,
         # hence "assertFalse" is used to check that it's empty.
-        self.assertFalse(response.context['object_list'])      
+        self.assertFalse(response.context['article_list'])      
 
 
 class ArticleCreateViewTest(TestCase):

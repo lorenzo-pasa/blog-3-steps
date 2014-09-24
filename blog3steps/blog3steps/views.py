@@ -46,10 +46,11 @@ class ArticleCreateView(AuthenticatedUserMixin, CreateView):
         """
         try:
             user_id = users.get_current_user().user_id()
-            blog = Blog.objects.get(administrator=user_id)
-            return super(ArticleCreateView, self).dispatch(request, *args, **kwargs)            
+            blog = Blog.objects.get(administrator=user_id)            
         except (AttributeError, Blog.DoesNotExist):
             return redirect(reverse('article_list'))
+        else:
+            return super(ArticleCreateView, self).dispatch(request, *args, **kwargs)        
     
     def form_valid(self, form):
         form.instance.author = users.get_current_user().user_id()
@@ -98,9 +99,10 @@ class BlogCreateView(AuthenticatedUserMixin, CreateView):
         try:
             user_id = users.get_current_user().user_id()
             blog = Blog.objects.get(administrator=user_id)
-            return redirect(reverse('blog_update', kwargs={'pk':blog.pk}))
         except (AttributeError, Blog.DoesNotExist):
-            return super(BlogCreateView, self).dispatch(request, *args, **kwargs)        
+            return super(BlogCreateView, self).dispatch(request, *args, **kwargs)
+        else:
+            return redirect(reverse('blog_update', kwargs={'pk':blog.pk}))
 
     def form_valid(self, form):
         google_user = users.get_current_user()
@@ -164,9 +166,10 @@ class WizardArticleCreateView(ArticleCreateView):
         try:
             user_id = users.get_current_user().user_id()
             blog = Blog.objects.get(administrator=user_id)
-            return reverse('blog_public', kwargs={'blog_url':blog.url})
         except (AttributeError, Blog.DoesNotExist):
             return reverse('admin_panel')
+        else:
+            return reverse('blog_public', kwargs={'blog_url':blog.url})
 
 #-- end of the Wizard classes --#
 
